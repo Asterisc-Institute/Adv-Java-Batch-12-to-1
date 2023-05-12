@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
@@ -54,9 +55,47 @@ public class UserDao {
 		con.close();
 		
 		return false;
+		
 	}
 	
-	
+	public ArrayList<User> getAllUser() throws ClassNotFoundException, SQLException {
+
+		String sql="select * from user_tbl";
+        Connection con=getConnect();
+		PreparedStatement ps=con.prepareStatement(sql);
+
+		ResultSet  rs= ps.executeQuery();
+		
+		ArrayList<User> ul=new ArrayList<>();
+		
+		while(rs.next())
+		{
+			User u =new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+			ul.add(u);
+		}
+		
+		
+		
+		
+		con.close();
+		
+		return ul;
+		
+	}
+
+
+	public int deleteUser(int uid) throws ClassNotFoundException, SQLException  {
+
+		String sql="DELETE FROM user_tbl WHERE uid=?";
+        Connection con=getConnect();
+		PreparedStatement ps=con.prepareStatement(sql);
+		ps.setInt(1,uid);
+
+		int a= ps.executeUpdate();
+		con.close();
+		return a;
+		
+	}
 	
 	
 	

@@ -1,3 +1,10 @@
 127.0.0.1 - - [08/May/2023:13:25:38 +0530] "GET / HTTP/1.1" 404 951
 0:0:0:0:0:0:0:1 - - [08/May/2023:13:25:38 +0530] "GET /Project01/ HTTP/1.1" 200 1367
 0:0:0:0:0:0:0:1 - - [08/May/2023:13:25:38 +0530] "GET /Project01/css/style.css HTTP/1.1" 200 1761
+127.0.0.1 - - [08/May/2023:13:42:34 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [08/May/2023:13:42:34 +0530] "GET /Project01/ HTTP/1.1" 200 1367
+0:0:0:0:0:0:0:1 - - [08/May/2023:13:42:34 +0530] "GET /Project01/css/style.css HTTP/1.1" 200 1761
+0:0:0:0:0:0:0:1 - - [08/May/2023:13:42:34 +0530] "GET /favicon.ico HTTP/1.1" 404 973
+0:0:0:0:0:0:0:1 - - [08/May/2023:13:42:59 +0530] "GET /Project01/registerServ?uname=asd&uemail=ram%40gmail.com&upass=aaa&cupass=aaa&policy=on HTTP/1.1" 200 49
+0:0:0:0:0:0:0:1 - - [08/May/2023:13:43:20 +0530] "GET /Project01/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [08/May/2023:13:43:30 +0530] "GET /Project01/registerServ?uname=fgbgfhg&uemail=ram%40gmail.com&upass=aa&cupass=aa&policy=on HTTP/1.1" 200 43
