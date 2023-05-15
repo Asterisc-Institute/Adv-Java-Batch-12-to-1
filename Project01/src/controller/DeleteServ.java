@@ -20,6 +20,7 @@ public class DeleteServ extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		int uid = Integer.parseInt(request.getParameter("id"));
+	    String pid =request.getParameter("pid");
 		UserDao db=new UserDao();
 		
 		try {
@@ -27,7 +28,7 @@ public class DeleteServ extends HttpServlet {
 			if(a>0)
 			{
 				System.out.print("User deleted");
-				response.sendRedirect("home");
+				response.sendRedirect("home?page="+pid);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

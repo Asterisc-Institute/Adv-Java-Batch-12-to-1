@@ -74,15 +74,35 @@ public class UserDao {
 			ul.add(u);
 		}
 		
-		
-		
-		
 		con.close();
 		
 		return ul;
 		
 	}
 
+	
+	public ArrayList<User> getUserByPage(int start,int total) throws ClassNotFoundException, SQLException {
+
+		start-=1;
+		String sql="select * from user_tbl limit "+start+","+total+"";
+        Connection con=getConnect();
+		PreparedStatement ps=con.prepareStatement(sql);
+
+		ResultSet  rs= ps.executeQuery();
+		
+		ArrayList<User> ul=new ArrayList<>();
+		
+		while(rs.next())
+		{
+			User u =new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+			ul.add(u);
+		}
+		
+		con.close();
+		
+		return ul;
+		
+	}
 
 	public int deleteUser(int uid) throws ClassNotFoundException, SQLException  {
 

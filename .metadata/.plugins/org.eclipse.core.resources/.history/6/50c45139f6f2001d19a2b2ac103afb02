@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -11,49 +10,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.User;
 import model.UserDao;
 
 
-//pojo
-@WebServlet("/registerServ")
-public class RegisterServ extends HttpServlet {
+@WebServlet("/delete")
+public class DeleteServ extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter out=response.getWriter();
-		String uname=request.getParameter("uname");
-		String upass=request.getParameter("upass");
-		String cupass=request.getParameter("cupass");
-		String uemail=request.getParameter("uemail");
-		String policy=request.getParameter("policy");
-		
-		//System.out.print("Data : "+uname+" "+upass+" "+cupass+" "+uemail+" "+policy);
-		
-		User u=new User(uname, upass, uemail);
-		System.out.println("Data 1 : "+u);
-//		u.setUname(uname);
-//		u.setUpass(cupass);
-//		u.setUemail(uemail);
-		
+		PrintWriter out = response.getWriter();
+		int uid = Integer.parseInt(request.getParameter("id"));
 		UserDao db=new UserDao();
+		
 		try {
-			
-			int a= db.save(u);
-			
+			int a=db.deleteUser(uid);
 			if(a>0)
-				out.print("User register<a href='login_page.html'>Login</a> ");
-			else
-				out.print("Error");
-			
+			{
+				System.out.print("User deleted");
+				response.sendRedirect("home");
+			}
 		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -21,20 +21,28 @@ public class HomeServ extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
+		int pageID=Integer.parseInt(request.getParameter("page"));
 		
-		
+		int start=pageID;
 		out.print("<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>");
 		out.print("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>");
 		out.print("<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>");
 		
+		int total=5;
+		if(start==1){}
+		else
+		{
+			start-=1;
+			start=start*total+1;
+		}
 		
 		
 		
 		UserDao db = new UserDao();
 		
 		try {
-			ArrayList<User> ul=db.getAllUser();
-			
+			//ArrayList<User> ul=db.getAllUser();
+			ArrayList<User> ul=db.getUserByPage(start, total);
 			
 			
 			out.print("<table class='table'>");
@@ -57,7 +65,7 @@ public class HomeServ extends HttpServlet {
 						out.print("<td>"+u.getUname()+"</td>");
 						out.print("<td>"+u.getUpass()+"</td>");
 						out.print("<td>"+u.getUemail()+"</td>");
-						out.print("<td><a class='btn btn-primary' href='#'>Update</a> <a class='btn btn-danger' href='delete?id="+u.getUid()+"'>Delete</a></td>");
+						out.print("<td><a class='btn btn-primary' href='#'>Update</a> <a class='btn btn-danger' href='delete?id="+u.getUid()+"&pid="+pageID+"'>Delete</a></td>");
 		        out.print("</tr>");
 			
 			}
@@ -67,11 +75,43 @@ public class HomeServ extends HttpServlet {
 			out.print("</tbody>");
 			out.print("</table>");
 			
+			
+			
+			
+			out.print("<div class='container'>");
+			out.print("<ul class='pagination'>");
+			
+			out.print("<li ");
+			if(pageID==1)
+			out.print("class='active'");
+			out.print("><a href='home?page=1'>1</a></li>");
+			
+			out.print("<li ");
+			if(pageID==2)
+			out.print("class='active'");
+			out.print("><a href='home?page=2'>2</a></li>");
+			
+			out.print("<li ");
+			if(pageID==3)
+			out.print("class='active'");
+			out.print("><a href='home?page=3'>3</a></li>");
+			
+			out.print("<li ");
+			if(pageID==4)
+			out.print("class='active'");
+			out.print("><a href='home?page=4'>4</a></li>");
+			
+			
+			out.print("</ul></div>");
+		
+
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		
 	
 	}
 
